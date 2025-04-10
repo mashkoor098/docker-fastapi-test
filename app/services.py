@@ -11,7 +11,7 @@ def check_dataset_exists():
         os.mkdir(datafolder)
     if not os.path.exists(datasource):
         with open(datasource, "w") as f:
-            f.write('{"data": []}')  # Initialize the file with an empty array
+            f.write('{"data": []}') 
 
 def read_usersdata():
     check_dataset_exists()
@@ -23,18 +23,18 @@ def read_usersdata():
     return users
 def add_userdata(user: dict):
     try:
-        # Read existing user data
+       
         users = read_usersdata()
 
-        # Add the new user to the data
+     
         if "data" in users:
-            users["data"].append(user)  # Append new user to the existing list
+            users["data"].append(user) 
         else:
-            users["data"] = [user]  # If no users exist, initialize with a list
+            users["data"] = [user] 
 
-        # Write the updated data back to the JSON file
+
         with open(datasource, "w") as f:
-            json.dump(users, f, indent=2)  # Dump the data with pretty formatting
+            json.dump(users, f, indent=2)  
         print("User data added successfully!")
 
     except Exception as e:
