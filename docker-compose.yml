@@ -4,8 +4,6 @@ services:
     build: .
     ports:
       - "8000:8000"
-    # volumes:
-    #   - ./data:/app/data  
     volumes: 
       - .:/app
       - ./data/app:/app/app/data
