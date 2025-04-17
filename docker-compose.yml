@@ -9,3 +9,4 @@ services:
       - ./data/app:/app/app/data
     environment:
       - PYTHONUNBUFFERED=1
+    restart: always
