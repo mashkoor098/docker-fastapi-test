@@ -2,16 +2,13 @@
 
 This repository contains a simple FastAPI application, as per the Nimap Infotech machine test requirements. The application is fully containerized using Docker and supports basic user management functionalities using a `users.json` file for data persistence.
 
-## 📂 Forked From  
-Original Repository: [docker-fastapi-test](https://github.com/RohitPatil18/docker-fastapi-test)
-
 ---
 
 ## 📌 Project Features
 
 - ✅ **FastAPI** web framework  
 - ✅ **Dockerized application** with `Dockerfile` and `docker-compose.yml`
-- ✅ **Persistent user data** stored in `data/app/users.json`
+- ✅ **Persistent user data** stored in `app/data/users.json`
 - ✅ **Automatic data folder creation** if missing
 - ✅ **API Documentation** available at `/docs` endpoint
 
@@ -63,25 +60,52 @@ Original Repository: [docker-fastapi-test](https://github.com/RohitPatil18/docke
 docker-fastapi-test/
 │
 ├── app/
-│   ├── main.py            # FastAPI application
-│   └── models.py          # Data models
-│
-├── data/
-│   └── app/
-│       └── users.json       # Persistent user data (working!)
-|
-├── Dockerfile             # Docker build configuration
-├── docker-compose.yml     # Docker Compose setup
+│   ├── main.py            # FastAPI app entry point
+│   ├── services.py        # Logic to handle file operations
+│   └── data/              # Contains users.json
+│       └── users.json     # Auto-created when user data is posted
+├── Dockerfile             # Docker image instructions
+├── docker-compose.yml     # Docker Compose file
 ├── requirements.txt       # Python dependencies
 └── README.md              # Project documentation
 ```
-
 ---
-
-## 🚀 Deployment Notes
-
-- ✅ Ensure Docker is installed and running.
-- ✅ The app does not use a database — all user data is saved in a flat file `data/app/users.json`.
-- ✅ Data is persistent even after container restart, thanks to Docker volumes.
-
+## User Payload
+```
+{
+  "data": [
+    {
+      "first_name": "Mashkoor",
+      "last_name": "Patel",
+      "age": 23
+    },
+    {
+      "first_name": "Mukesh",
+      "last_name": "Patil",
+      "age": 23
+    },
+    {
+      "first_name": "Rohit",
+      "last_name": "Koli",
+      "age": 23
+    }
+  ]
+}
+```
 ---
+## Docker Compose File
+```
+version: '3.9'
+
+services:
+  fastapi-app:
+    build: .
+    container_name: fastapi-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - ./app/data:/app/app/data
+    restart: always
+```
+
