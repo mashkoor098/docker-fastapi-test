@@ -9,6 +9,12 @@
       "first_name": "Mukesh",
       "last_name": "Patil",
       "age": 23
+    },
+    ,
+    {
+      "first_name": "Rohit",
+      "last_name": "Koli",
+      "age": 23
     }
   ]
 }
